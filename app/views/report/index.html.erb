@@ -1,0 +1,501 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title><%= @drugs.first.brand %> | Davaai.in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flatstrap by Littlesparkvt.com">
+    <meta name="author" content="littlesparkvt.com">
+
+    <!-- Le styles -->
+    <link href="<%= root_url %>/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="<%= root_url %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="<%= root_url %>/assets/css/docs.css" rel="stylesheet">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.css" rel="stylesheet">
+	<link href="<%= root_url %>/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="<%= root_url %>/assets/css/style2.css" />
+    <link rel='stylesheet' href='<%= root_url %>/assets/css/watable.css'/>
+	
+	 <!-- Le Google Fonts -->	
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
+
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="<%= root_url %>/assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<%= root_url %>/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= root_url %>/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= root_url %>/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="<%= root_url %>/assets/ico/apple-touch-icon-57-precomposed.png">
+	
+	<!-- Javascripts --->
+	 <script src="<%= root_url %>/assets/js/jquery.js" type="text/javascript"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<%= root_url %>/assets/js/jquery.watable.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<%= root_url %>/assets/js/Chart.js"></script>
+	<script src="<%= root_url %>/assets/js/modernizr.custom.63321.js"></script>
+	<script src="<%= root_url %>/assets/js/bootstrap-tooltip.js"></script>
+  
+	<style type="text/css">
+	body{
+	font-family: 'Roboto', sans-serif;
+	}
+	canvas{
+	}
+	</style>
+	
+	<!-- Font Script
+	=====================================-->
+	<script type="text/javascript">
+		  WebFontConfig = {
+			google: { families: [ 'Roboto::latin' ] }
+		  };
+		  (function() {
+			var wf = document.createElement('script');
+			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+			  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+			wf.type = 'text/javascript';
+			wf.async = 'true';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(wf, s);
+		  })(); 
+	</script>
+
+
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar" data-twttr-rendered="true" <!--style="background: #f7f7f7 url(images/patterns/.png)--> repeat top left;">
+
+   <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+         
+		  <img class="imgbrand" src="<%= root_url %>/assets/img/logo.png" height="40" width="40"></img>
+		  <a class="brand" href="./index.html">Davaaai</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active">
+                <a href="./index.html">Home</a>
+              </li>
+              <li class="">
+                <a href="./getting-started.html">Generic Medicines</a>
+              </li>
+              <li class="">
+                <a href="./scaffolding.html">FAQs</a>
+              </li>
+              <li class="">
+                <a href="./base-css.html">About Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+	 <!-- Container
+    ================================================== -->
+	<div class="container-fluid">
+
+	<!--<div class="row-fluid" style="margin-top: 1em;margin-bottom: 0em;">
+		<div class="span3" align="center">
+		</div>
+		<div class="span6" align="center">
+		<form action="report.html"class="form-search" style=".dropdown-menu .active > a:hover { color: #333333; text-decoration: none; background-color: rgba(0, 0, 0, 1); }">
+			<input type="search" placeholder="Eg: Combiflam" data-provide="typeahead" data-items="4" data-source="[&quot;Paracetamol &quot;,&quot;Crocin&quot;,&quot;Dispirin&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]">
+			<button href="#" class="btn btn-primary"><i class="icon-search"></i> Search</button>
+							
+		</form>
+		</div>
+		<div class="span3" align="right">
+		</div>
+	</div>-->
+	<% if (true) %>
+	<div class="row-fluid" align="center" style="margin-top: 1em;margin-bottom: 0em;">
+				<div class="span3" align="center">
+				</div>
+				<div class="span6" align="center">
+					<div class="alert alert-block alert-success fade in">
+						<button type="button" class="close" data-dismiss="alert">x</button>
+						<p><%= @drugs.first.brand %> + <%= @drugs.length %></p>
+					</div>
+				</div>
+				<div class="span3" align="center">
+				</div>
+				
+	</div>
+	<% end %>
+	
+	<!-- Template
+	<div class="row-fluid" >
+		<div class="span3" align="center">
+		</div>
+		<div class="span6" align="center">
+
+		</div>
+		<div class="span3" align="center">
+		</div>
+	</div>
+	-->
+
+	<!-- Notepad-->
+	<div class="row-fluid" style="margin-top:20px" >
+		<div class="span3 ">
+		<ul class="nav nav-list bs-docs-sidenav affix-top">
+          <li class="active"><a><strong>Knowledge Center</strong></a></li>
+		  <li><a href="#"><i class="icon-chevron-right"></i>Are Generic Drugs Safe?</a></li>
+          <li><a href="#"><i class="icon-chevron-right"></i>Generic Substitute</a></li>
+          <li><a href="#"><i class="icon-chevron-right"></i>Learn More..</a></li>
+        </ul>
+		
+		<!-- Paper -->
+		
+		<div class="paper" style="background-color: rgb(237, 250, 229);">
+			<div class="tape"></div>
+				<div class="row-fluid" style="font-family: 'Coming Soon', cursive;" >
+				
+					<div class="span1">
+					</div>
+					<div class="span10" align="center">
+						<br />
+						 <p><strong>Davaaai SMS</strong></p>
+						 <p>Now get medicine information on SMS</p>
+						 <br />
+						 <p>Send "#davaai medicine_name" to 5444</p>
+						 <p>e.g "#davaai crocin" to 5444</p>  
+						 
+				  
+					</div>
+					<div class="span1">
+					</div>
+				</div>
+		
+		
+			<div class="left-shadow"></div>
+			<div class="right-shadow"></div>
+			</div>
+		
+		</div>
+			
+		
+		<div class="span6">
+			<div class="papers">
+			<div class="container-fluid">
+				
+				<div class="row-fluid" >
+					<div align="center">
+					<a href="#" style="margin: 0px;padding=0px;" rel="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on top">
+					<p class="text-info"><h3><i class="icon-medkit"></i> <%= @drugs.first.brand %> <span class="label label-warning"><%= @drugs.first.category %></span></h3></p>
+					</a>
+					</div>
+				</div>
+				
+				<div class="row-fluid" style="background: #d9edf7;">
+					<div class="span3" >
+					<p style="margin-top:8px;margin-bottom:8px;margin-left:5px;"><%= @drugs.first.package_qty.to_i %> <% if @drugs.first.package_qty.to_i>1%><%= @drugs.first.package_type+"s" %><%else%><%= @drugs.first.package_type %><%end%></p>
+					</div>
+					<div class="span6" align="center">
+					<p style="margin-top:8px;margin-bottom:8px"><%= @drugs.first.manufacturer %></p>
+					</div>
+					<div class="span3">
+					<p style="margin-top:8px;margin-bottom:8px;"class="text-info"><span class="label label-info">MRP <i class="icon-inr"></i> <%= @drugs.first.package_price %></span></p>
+					</div>
+				</div>
+				
+				<div class="row-fluid" >
+				<hr style="margin: 1px; width=30px;>
+				</div>
+				
+				
+				<div class="row-fluid" >
+					<br />
+					
+					<p class="text-info" style="font-size: 18px;"><i class="icon-beaker"></i> COMPOSITION <p>
+					<p style="background:rgb(224, 216, 240);padding-top: 8px;padding-bottom: 8px;padding-left: 5px;"><% @temp="" %><% @generics.each do |g| %><% @temp=@temp+g.name+": "+g.strength+" + "%><% end %><%= @temp[0,@temp.length-2]%></p>
+					
+				</div>
+				<div class="row-fluid" >
+				<hr style="margin: 1px; width=30px;>
+				</div>
+				
+				<div class="row-fluid" >
+					<br />
+					
+					<p class="text-info" style="font-size: 18px;"><i class="icon-plus-sign"></i> GENERIC SUBSTITUTE <p>
+					<div class="row-fluid">
+						<div class="span4" align="center">
+								<!-- Chart
+								===================================== -->
+								<canvas id="genChart" height="150" width="150"></canvas>
+								<script>
+
+									var pieData = [
+											
+											{
+												value : 30,
+												color : "#E0E4CC"
+											},
+											{
+												value: 70,
+												color:"83D183"
+											},
+											
+										
+										];
+
+								var myPie = new Chart(document.getElementById("genChart").getContext("2d")).Pie(pieData);
+								
+								
+								</script>
+								<!-- ======================================= -->
+						<p class="text-success"><i class="icon-thumbs-up"></i> 69.2% Cheaper</p>
+						<!--<p class="text-error"><i class="icon-thumbs-down"></i> 89.2% Costlier</p>-->
+						
+						</div>					
+						<div class="span8" align="center">
+							<div align="center">
+								<h4 class="text-info"><strong><i class="icon-plus-sign"></i> Atorvastatin</strong><small> 10mg</small></h4> 
+							</div>
+							<p class="text-info"><span class="label label-info"><i class="icon-inr"></i> 2.85</span></p>
+							<p>for a pack of <strong>10 Tablets</strong></p>
+							<p class="text-success"><i class="icon-level-up"></i> You save <span class="label label-success"><i class="icon-inr"></i> 100.89</span></p>
+							<button type="button" class="btn btn-info"><i class="icon-hospital"></i> Find a store!</button>
+						</div>
+						
+					</div>
+					<br />
+					
+				</div>
+				
+				<div class="row-fluid" >
+				<hr style="margin: 1px; width=30px;>
+				</div>
+				
+				<div class="row-fluid" >
+					<br />
+					
+					<p class="text-info" style="font-size: 18px;"><i class="icon-plus-sign-alt"></i> OTHER BRANDED SUBSTITUTES <p>
+						<table class="table table-hover">
+						  
+						  <tbody>
+							<tr class="info">
+							  <td>Brand</td>
+							  <td>Pack</td>
+							  <td>Price</td>
+							  <td> </td>
+							</tr>
+							<tr>
+							  <td>
+								<a href="#" style="margin: 0px;padding=0px;" rel="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Manufacturer" data-original-title="Popover on top">
+									Atorva (10 mg)
+								</a>
+							  </td>
+							  <td>10 Tablets</td>
+							  <td>12.7</td>
+							  <td>
+								<p class="text-success"><i class="icon-thumbs-up"></i> 29% cheaper</p>
+						      </td>
+							</tr>
+							<tr>
+							  <td>
+								<a href="#" style="margin: 0px;padding=0px;" rel="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Manufacturer" data-original-title="Popover on top">
+									Carato  (10 mg)
+								</a>
+							  </td>
+							  <td>10 Tablets</td>
+							  <td>16.47</td>
+							  <td>
+								<p class="text-success"><i class="icon-thumbs-up"></i> 29% cheaper</p>
+						      </td>
+							</tr>
+							<tr>
+							  <td>
+								<a href="#" style="margin: 0px;padding=0px;" rel="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Manufacturer" data-original-title="Popover on top">
+									Arpitor CP (10 mg)
+								</a>
+							  </td>
+							  <td>90 Tablets</td>
+							  <td>149.47</td>
+							  <td>
+								<p class="text-success"><i class="icon-thumbs-up"></i> 29% cheaper</p>
+						      </td>
+							</tr>
+							<tr>
+							  <td>
+								<a href="#" style="margin: 0px;padding=0px;" rel="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Manufacturer" data-original-title="Popover on top">
+									Alip (10 mg)
+								</a>
+							  </td>
+							  <td>10 Tablets</td>
+							  <td>118.47</td>
+							  <td>
+								<p class="text-error"><i class="icon-thumbs-down"></i> 59% costlier</p>
+						      </td>
+							</tr>
+						  </tbody>
+						</table>
+				
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="span3" align="center">
+			<!-- Search-->
+			<div class="row-fluid" >
+				<div class="span12" align="center">
+					<br />
+				
+				</div>
+				<div class="span12" align="center">
+					<br />
+					<form action="report.html "class="form-search" style=".dropdown-menu .active > a:hover { color: #333333; text-decoration: none; background-color: rgba(0, 0, 0, 1); }">
+						<input type="search"  placeholder="Eg: Combiflam" data-provide="typeahead" data-items="4" data-source="[&quot;Paracetamol &quot;,&quot;Crocin&quot;,&quot;Dispirin&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]">
+						<button href="#" style="height: 29px;" class="btn btn-primary"><i class="icon-search"></i></button>
+										
+					</form>
+				</div>
+				
+			</div>
+		
+			<!-- Notepad-->
+			<div class="row">
+			<div class="paper">
+			<div class="tape"></div>
+				<div class="row-fluid" style="font-family: 'Coming Soon', cursive;" >
+				
+					<div class="span1">
+					</div>
+					<div class="span10" align="center">
+						<br />
+						 <p><strong>Davaaai SMS</strong></p>
+						 <p>Now get medicine information on SMS</p>
+						 <br />
+						 <p>Send "#davaai medicine_name" to 5444</p>
+						 <p>e.g "#davaai crocin" to 5444</p>  
+						 
+				  
+					</div>
+					<div class="span1">
+					</div>
+				</div>
+			<div class="left-shadow"></div>
+			<div class="right-shadow"></div>
+			</div>
+			</div>
+			
+			<!-- Recent Search -->
+			<div class="row-fluid" align="center" >
+			<br />
+			<div class="span10" align="center">
+			<ul class="nav nav-pills nav-stacked" style="background: rgb(247, 247, 247);">
+			  <li class="active"><a href="#">Recent Searches</a></li>
+			  <li><a href="#">Crocin</a></li>
+			  <li><a href="#">Amaryl</a></li>
+			  <li><a href="#">Voveran</a></li>
+			  <li><a href="#">Plavix</a></li>
+			  <li><a href="#">Atrova</a></li>
+			</ul>
+			</div>
+			</div>
+			
+		</div>
+		
+	</div>
+
+	<div class="row-fluid" align="center">
+
+	</div>
+
+	</div>
+	<div>
+	
+	</div>
+
+		
+			
+			
+			
+    <!-- Footer
+    ================================================== -->
+
+    <footer class="footer">
+		<hr>
+      <div class="container">
+        
+        <div align="center">made with <i style="color: #dd514c"class="icon-heart"></i> by <a href="http://www.code9.co.in" target="_blank">@code9</a></div>
+		<div align="center"><a data-toggle="modal" href="#tos" class="link">tos</a> | <a data-toggle="modal" href="#tos" class="link">api</a> | <a data-toggle="modal" href="#tos" class="link">contact us</a></div>
+		<br />
+		<hr>
+		<br style="padding: 1px;"/>
+		
+	  </div>
+	  
+    </footer>
+	
+	<!-- Modals
+	==================================================== -->
+	<!-- Modal -->
+	<div id="tos" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="myModalLabel">Modal header</h3>
+	  </div>
+	  <div class="modal-body">
+		<p>One fine body</p>
+	  </div>
+	  <div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary">Save changes</button>
+	  </div>
+	</div>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="<%= root_url %>/assets/js/jquery.js"></script>
+    <script src="<%= root_url %>/assets/js/google-code-prettify/prettify.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-transition.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-alert.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-modal.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-dropdown.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-tab.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-tooltip.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-popover.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-button.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-collapse.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-carousel.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-typeahead.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-affix.js"></script>
+    <script src="<%= root_url %>/assets/js/application.js"></script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30702122-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+
+</body></html>

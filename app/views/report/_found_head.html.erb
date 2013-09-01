@@ -1,0 +1,240 @@
+<head>
+    <meta charset="utf-8">
+    <title>Payl.es | Cheap Medicine Discovery Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flatstrap by Littlesparkvt.com">
+    <meta name="author" content="littlesparkvt.com">
+
+    <!-- Le styles -->
+    <link href="<%= root_url %>/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="<%= root_url %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="<%= root_url %>/assets/css/docs.css" rel="stylesheet">
+    <link href="<%= root_url %>/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="<%= root_url %>/assets/css/style2.css" />
+	<link rel='stylesheet' href='<%= root_url %>/assets/css/watable.css'/>
+	
+	<!-- Le Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="<%= root_url %>/assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<%= root_url %>/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%= root_url %>/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%= root_url %>/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="<%= root_url %>/assets/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="stylesheet" type="text/css" href="<%= root_url %>/assets/css/style7.css">
+	<link rel="stylesheet" type="text/css" href="<%= root_url %>/assets/css/style4.css" />
+	
+	<script type="text/javascript" src="<%= root_url %>/assets/js/modernizr.custom.79639.js"></script> 
+	<script type="text/javascript" src="<%= root_url %>/assets/js/nod.min.js"></script> 
+	<script src="<%= root_url %>/assets/js/jquery.js"></script>
+	<script src="<%= root_url %>/assets/js/bootstrap-typeahead.js"></script>
+	
+	
+	<!--[if lte IE 8]><style>.support-note .note-ie{display:block;}</style><![endif]-->
+	<style type="text/css">
+
+      /* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+		
+		font-family: 'Roboto', sans-serif;
+	
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #ifooter {
+        height: 90px;
+      }
+      #ifooter {
+        background-color: #ffffff;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #ifooter {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  *margin-bottom: -3px;
+}
+
+.dropdown-toggle:active,
+.open .dropdown-toggle {
+  outline: 0;
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: top;
+  border-top: 4px solid #000000;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  content: "";
+}
+
+.dropdown .caret {
+  margin-top: 8px;
+  margin-left: 2px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  font-size: 16px;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 553px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+}
+
+.dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+
+.dropdown-menu .divider {
+  *width: 100%;
+  height: 1px;
+  margin: 9px 1px;
+  *margin: -5px 0 5px;
+  overflow: hidden;
+  background-color: #e5e5e5;
+  border-bottom: 1px solid #ffffff;
+}
+
+.dropdown-menu li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 20px;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.dropdown-menu li > a:hover,
+.dropdown-menu li > a:focus,
+.dropdown-submenu:hover > a {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0081c2;
+}
+
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0081c2;
+}
+
+.dropdown-menu .disabled > a,
+.dropdown-menu .disabled > a:hover {
+  color: #999999;
+}
+
+.dropdown-menu .disabled > a:hover {
+  text-decoration: none;
+  cursor: default;
+  background-color: transparent;
+  background-image: none;
+}
+
+
+
+
+    </style>
+
+	<!-- Font Script
+	=====================================-->
+	<script type="text/javascript">
+		  WebFontConfig = {
+			google: { families: [ 'Roboto::latin' ] }
+		  };
+		  (function() {
+			var wf = document.createElement('script');
+			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+			  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+			wf.type = 'text/javascript';
+			wf.async = 'true';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(wf, s);
+		  })(); 
+	</script>
+
+	<script type="text/javascript">
+    window.onload = function()
+    {
+        if(!window.jQuery)
+        {
+            alert('jQuery not loaded');
+        }
+        else
+        {
+            $(document).ready(function(){
+               
+
+            });
+        }
+    }
+	</script>	
+	<script>
+			$('#typehd').typeahead({
+				source: function (query, process) {
+					return $.getJSON(
+						'lookup.json',
+						{ query: query },
+						function (data) {
+							return process(data);
+						});
+				}
+			});
+	</script>
+	
+
+
+  </head>

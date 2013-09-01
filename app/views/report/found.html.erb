@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head Partial -->
+  <%= render(:partial => "found_head")%>
+  
+   <!-- Navbar-->
+  <%= render(:partial => "navbar")%>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+  
+
+ 
+    
+			<!-- Main Body Wrapper
+			=============================================== -->	
+			<div id="wrapper" style="position:relative;height:480px">
+						<!-- Logo
+						================================================== -->
+						
+						<br /><br /> 
+			<!-- Main Body
+			================================================== -->
+
+			<!-- Intro
+			=================================================== -->
+						
+				
+			<div class="container-fluid">
+				<div class="row-fluid" >
+					<div class="span12" align="center">
+						<div align="center">
+							<h1 style="font-size: 30px;font-family: 'Josefin Sans', sans-serif;font-weight: bold;"><%= "#{@suggestions.length}"%> medicines found!</h1>
+						</div>
+						<hr>
+						<p style="margin-left: 100px;margin-right: 100px;"></p>
+						
+						<p style="font-size: 22px;font-family: 'Josefin Sans', sans-serif;font-weight: bold;">
+							<%@suggestions_paginated.each do |sggn|%>
+								<%= link_to "#{sggn.brand}",{:action => "show" ,:id =>"#{sggn.brand}", :search_tag=>"#{@tag_ids[0]}"} %><br /><br />
+							<%end%>
+						</p>
+						<div align="center">
+							<%= paginate @suggestions_paginated %>
+						</div>
+						<br />
+						
+							
+					</div>
+					
+				</div>
+				
+			</div>
+		
+			
+	</div>
+
+
+
+	
+
+
+    <!-- Footer
+    ================================================== -->
+
+    <footer class="footer">
+    	<br /><br /><br /><br />
+		<hr style="margin-top: 30px;">
+      <div class="container">
+        
+        <div align="center">made with <i style="color: #dd514c"class="icon-heart"></i> by <a href="http://www.code9.co.in" target="_blank">@code9</a></div>
+		<div align="center"><a data-toggle="modal" href="#tos" class="link">tos</a> | <a data-toggle="modal" href="#tos" class="link">api</a> | <a data-toggle="modal" href="#tos" class="link">contact us</a></div>
+		<br />
+		<hr>
+		<br style="padding: 1px;"/>
+		
+	  </div>
+	  
+    </footer>
+	
+	<!--- Modals
+	================================================== -->
+	<!-- Are Generic Medicines Safe -->
+	<div id="isSafe" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 style="font-size: 22px;font-family: 'Josefin Sans', sans-serif;font-weight: bold;" id="myModalLabel"> Generic Medicines</h3>
+	  </div>
+	  <div class="modal-body">
+		<img src="<%= root_url %>/assets/img/infographic.png"></img>
+	  </div>
+	  <div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		
+	  </div>
+	</div>
+	
+	
+
+	
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="<%= root_url %>/assets/js/jquery.js"></script>
+    <script src="<%= root_url %>/assets/js/google-code-prettify/prettify.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-transition.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-alert.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-modal.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-dropdown.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-tab.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-tooltip.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-popover.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-button.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-collapse.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-carousel.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-typeahead.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-affix.js"></script>
+    <script src="<%= root_url %>/assets/js/application.js"></script>
+
+
+
+
+</body></html>

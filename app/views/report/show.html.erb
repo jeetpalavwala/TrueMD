@@ -1,0 +1,328 @@
+<html lang="en">
+	<!-- <head> partial -->
+	<%=render(:partial => "head")%>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar" data-twttr-rendered="true" <!--style="background: #f7f7f7 url(images/patterns/.png)--> repeat top left;">
+
+	<!-- Navbar-->
+	<%=render(:partial => "navbar")%>
+   
+	 <!-- Container
+    ================================================== -->
+	<div class="container-fluid">
+	
+	<!-- Success Alert-->
+	<%=render(:partial => "success_alert") %>
+	
+	<!-- Template
+	<div class="row-fluid" >
+		<div class="span3" align="center">
+		</div>
+		<div class="span6" align="center">
+
+		</div>
+		<div class="span3" align="center">
+		</div>
+	</div>
+	-->
+
+	<!-- Main-->
+	<div class="row-fluid" style="margin-top:20px" >
+		<!-- Left Sidebar-->
+		<div class="span3 ">
+		
+					<!-- Nav Bar -->
+					<ul class="nav nav-list bs-docs-sidenav affix-top">
+					  <li class="active"><a><strong>Knowledge Center</strong></a></li>
+					  <li><a href="#"><i class="icon-chevron-right"></i>Are Generic Drugs Safe?</a></li>
+					  <li><a href="#"><i class="icon-chevron-right"></i>Generic Substitute</a></li>
+					  <li><a href="#"><i class="icon-chevron-right"></i>Learn More..</a></li>
+					</ul>
+					
+					<!-- Sticky Note -->
+					<div class="paper" style="background-color: rgb(237, 250, 229);">
+						<div class="tape"></div>
+							<div class="row-fluid" style="font-family: 'Coming Soon', cursive;" >
+							
+								<div class="span1">
+								</div>
+								<div class="span10" align="center">
+									<br />
+									 <p><strong>Payl.es SMS</strong></p>
+									 <p>Now get medicine information on SMS</p>
+									 <br />
+									 <p>Send "#davaai medicine_name" to 5444</p>
+									 <p>e.g "#davaai crocin" to 5444</p>  
+									 
+							  
+								</div>
+								<div class="span1">
+								</div>
+							</div>
+					
+					
+						<div class="left-shadow"></div>
+						<div class="right-shadow"></div>
+						</div>
+					
+		</div>
+						
+		<!-- Center Body-->
+		<div class="span6">
+		
+			<!-- Report-->
+			<div class="papers">
+			<div class="container-fluid">
+				
+				<div class="row-fluid" >
+					<div align="center">
+					<a style="text-decoration:none"href="#" style="margin: 0px;padding=0px;" rel="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on top">
+					<p class="text-info"><h3><i class="icon-medkit"></i> <%= @drugs.first.brand %> <span class="label label-warning"><%= @drugs.first.category %></span></h3></p>
+					</a>
+					</div>
+				</div>
+				
+				<div class="row-fluid" style="background: #d9edf7;">
+					<div class="span3" >
+					<p style="margin-top:8px;margin-bottom:8px;margin-left:5px;"><%= @drugs.first.package_qty.to_i %> <% if @drugs.first.package_qty.to_i>1&&(@drugs.first.package_type=="Tablet" || @drugs.first.package_type=="Capsule" || @drugs.first.package_type=="gm")%><%= @drugs.first.package_type+"s" %><%else%><%= @drugs.first.package_type %><%end%></p>
+					</div>
+					<div class="span6" align="center">
+					<p style="margin-top:8px;margin-bottom:8px"><%= @drugs.first.manufacturer %></p>
+					</div>
+					<div class="span3">
+					<p style="margin-top:8px;margin-bottom:8px;"class="text-info"><span class="label label-info">MRP <i class="icon-inr"></i> <%= @drugs.first.package_price %></span></p>
+					</div>
+				</div>
+				
+				<div class="row-fluid" >
+				<hr style="margin: 1px; width=30px;>
+				</div>
+				
+				
+				<div class="row-fluid" >
+					<br />
+					
+					<p class="text-info" style="font-size: 18px;"><i class="icon-beaker"></i> COMPOSITION <p>
+					<p style="background:rgb(224, 216, 240);padding-top: 8px;padding-bottom: 8px;padding-left: 5px;"><% @temp="" %><% @drug_constituents.each do |g| %><% @temp=@temp+g.name+": "+g.strength+" + "%><% end %><%= @temp[0,@temp.length-2]%></p>
+					
+				</div>
+				<div class="row-fluid" >
+				<hr style="margin: 1px; width=30px;>
+				</div>
+				
+				<div class="row-fluid" >
+					<br />
+					
+					<p class="text-info" style="font-size: 18px;"><i class="icon-plus-sign"></i><a rel="tooltip" data-placement="top" title="" data-original-title="Generic medicine having same composition as <%= @drugs.first.brand %>"> GENERIC SUBSTITUTE</a><p>
+					<div class="row-fluid">
+						<div class="span4" align="center">
+								<!-- Chart
+								===================================== -->
+								<canvas id="genChart" height="150" width="150"></canvas>
+								<script>
+									<% @generic_price=0.01%>
+									<%if @drugs.first.unit_price >= @generic_price%>
+									var pieData = [
+											
+											{
+												value : <%= 100-((@drugs.first.unit_price - @generic_price)/@drugs.first.unit_price*100) %>,
+												color : "#E0E4CC"
+											},
+											{
+												value: <%= (@drugs.first.unit_price - @generic_price)/@drugs.first.unit_price*100 %>,
+												color:"#83D183"
+											},
+											
+										
+										];
+									<%else%>
+									var pieData = [
+											
+											{
+												value : <%= 100-((@generic_price-@drugs.first.unit_price)/@drugs.first.unit_price*100) %>,
+												color : "#E0E4CC"
+											},
+											{
+												value: <%= (@generic_price-@drugs.first.unit_price)/@drugs.first.unit_price*100 %>,
+												color:"b94a48"
+											},
+											
+										
+										];
+									
+									<%end%>
+
+									var myPie = new Chart(document.getElementById("genChart").getContext("2d")).Pie(pieData);
+								
+								
+								</script>
+								<!-- ======================================= -->
+						<%if @drugs.first.unit_price >= @generic_price%>
+						<p class="text-success"><i class="icon-thumbs-up"></i> <%@ft=(@drugs.first.unit_price - @generic_price)/@drugs.first.unit_price*100%><%=(@ft * 100).round.to_f / 100%>% Cheaper</p>
+						<%else%>
+						<p class="text-error"><i class="icon-thumbs-down"></i><% @ft= (@generic_price-@drugs.first.unit_price)/@drugs.first.unit_price*100 %><%=(@ft * 100).round.to_f / 100%>%  Costlier</p>
+						<%end%>
+						
+						</div>					
+						<div class="span8" align="center">
+							<div align="center">
+								<h4 class="text-info"><strong><i class="icon-plus-sign"></i> Atorvastatin</strong><small> 10mg</small></h4> 
+							</div>
+							<p class="text-info"><span class="label label-info"><i class="icon-inr"></i> 2.85</span></p>
+							<p>for a pack of <strong>10 Tablets</strong></p>
+							<p class="text-success"><i class="icon-level-up"></i> You save <span class="label label-success"><i class="icon-inr"></i> 100.89</span></p>
+							<button type="button" class="btn btn-info"><i class="icon-hospital"></i> Find a store!</button>
+						</div>
+						
+					</div>
+					<br />
+					
+				</div>
+				
+				<div class="row-fluid" >
+				<hr style="margin: 1px; width=30px;>
+				</div>
+				
+				<div class="row-fluid" >
+					<br />
+					<p class="text-info" style="font-size: 18px;"><i class="icon-plus-sign-alt"></i> <a rel="tooltip" data-placement="top" title="" data-original-title="Branded medicine having same composition as <%= @drugs.first.brand %>">OTHER BRANDED SUBSTITUTES</a><p>
+					
+					<!-- Table Partial -->
+					<%= render(:partial => "alt_table")%>
+					<!-- Paginate -->
+					<div align="center">
+					<%= paginate @alt_drugs_paginated %>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+		</div>
+		
+		<!-- Right Sidebar-->
+		<div class="span3" align="center">
+			<!-- Search-->
+			<div class="row-fluid" >
+				<div class="span12" align="center">
+					<br />
+				
+				</div>
+				<div class="span12" align="center">
+					<br />
+					<form action="report.html "class="form-search" style=".dropdown-menu .active > a:hover { color: #333333; text-decoration: none; background-color: rgba(0, 0, 0, 1); }">
+						<input type="search"  placeholder="Eg: Combiflam" data-provide="typeahead" data-items="4" data-source="[&quot;Paracetamol &quot;,&quot;Crocin&quot;,&quot;Dispirin&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]">
+						<button href="#" style="height: 29px;" class="btn btn-primary"><i class="icon-search"></i></button>
+										
+					</form>
+				</div>
+				
+			</div>
+		
+			<!-- Sticky Note-->
+			<div class="row">
+			<div class="paper">
+			<div class="tape"></div>
+				<div class="row-fluid" style="font-family: 'Coming Soon', cursive;" >
+				
+					<div class="span1">
+					</div>
+					<div class="span10" align="center">
+						<br />
+						 <p><strong>Payl.es SMS</strong></p>
+						 <p>Now get medicine information on SMS</p>
+						 <br />
+						 <p>Send "#davaai medicine_name" to 5444</p>
+						 <p>e.g "#davaai crocin" to 5444</p>  
+						 
+				  
+					</div>
+					<div class="span1">
+					</div>
+				</div>
+			<div class="left-shadow"></div>
+			<div class="right-shadow"></div>
+			</div>
+			</div>
+			
+			<!-- Recent Search -->
+			<div class="row-fluid" align="center" >
+			<br />
+			<div class="span10" align="center">
+			<ul class="nav nav-pills nav-stacked" style="background: rgb(247, 247, 247);">
+			  <li class="active"><a href="#">You Recently Viewed</a></li>
+			  
+			  <li><a href="<%= root_url%>report/show?id=<%= cookies[:r1]%>&tag_ids[]=1"><%= cookies[:r1]%></a></li>
+			  <li><a href="<%= root_url%>report/show?id=<%= cookies[:r2]%>&tag_ids[]=1"><%= cookies[:r2]%></a></li>
+			  <li><a href="<%= root_url%>report/show?id=<%= cookies[:r3]%>&tag_ids[]=1"><%= cookies[:r3]%></a></li>
+			  <li><a href="<%= root_url%>report/show?id=<%= cookies[:r4]%>&tag_ids[]=1"><%= cookies[:r4]%></a></li>
+			  <li><a href="<%= root_url%>report/show?id=<%= cookies[:r5]%>&tag_ids[]=1"><%= cookies[:r5]%></a></li>
+			  
+			</ul>
+			</div>
+			</div>
+			
+		</div>
+		
+	</div>
+
+	<div class="row-fluid" align="center">
+
+	</div>
+
+	</div>
+	<div>
+	
+	</div>
+
+		
+			
+			
+			
+    <!-- Footer-->
+	<%= render(:partial => "footer")%>
+    
+	
+	<!-- Modals
+	==================================================== -->
+	<!-- Modal -->
+	<div id="tos" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="myModalLabel">Modal header</h3>
+	  </div>
+	  <div class="modal-body">
+		<p>One fine body</p>
+	  </div>
+	  <div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary">Save changes</button>
+	  </div>
+	</div>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="<%= root_url %>/assets/js/jquery.js"></script>
+    <script src="<%= root_url %>/assets/js/google-code-prettify/prettify.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-transition.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-alert.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-modal.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-dropdown.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-tab.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-tooltip.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-popover.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-button.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-collapse.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-carousel.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-typeahead.js"></script>
+    <script src="<%= root_url %>/assets/js/bootstrap-affix.js"></script>
+    <script src="<%= root_url %>/assets/js/application.js"></script>
+
+
+
+
+</body></html>

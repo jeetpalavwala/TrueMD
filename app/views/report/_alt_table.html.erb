@@ -1,0 +1,28 @@
+<table class="table table-hover">
+<tbody>
+	<tr class="info">
+	  <td>Brand</td>
+	  <td>Pack</td>
+	  <td>Price</td>
+	  <td>Comparision</td>
+	</tr>
+	
+	<!-- List of Alternate Medicines -->
+	<% @alt_drugs_paginated.each do |d| %>
+	
+	<tr>
+	  <td><a style="text-decoration:none" href="<%= root_url %>report/show?id=<%=d.brand%>&tag_ids[]=1" rel="tooltip" data-placement="left" title="<%@tempo=""%><%@hash.each do |key,value|%><%@tempo=@tempo+key+": "+value+" + "%><%=@tempo[0,@tempo.length-3]%><%end%>" data-original-title=""><%= d.brand %></a></td>
+	  <td><a style="color: #000000;text-decoration:none"rel="tooltip" data-placement="left" title="" data-original-title="Unit: <%=d.unit_qty.to_i%> <%=d.unit_type%>"><%= d.package_qty.to_i%> <% if d.package_qty.to_i>1&&(d.package_type=="Tablet" || d.package_type=="Capsule" || d.package_type=="gm")%><%= d.package_type+"s" %><%else%><%= d.package_type%><%end%></a></td>
+	  <td><a style="color: #000000;text-decoration:none" rel="tooltip" data-placement="left" title="" data-original-title="Unit Price: <%=d.unit_price%>"><%=d.package_price%></td>
+	  <%if (@drugs.first.package_price/@drugs.first.package_qty) >= (d.package_price/d.package_qty)%>
+	  <td><p class="text-success"><i class="icon-thumbs-up"></i> <%@ft=((@drugs.first.package_price/@drugs.first.package_qty)- (d.package_price/d.package_qty))/(@drugs.first.package_price/@drugs.first.package_qty)*100%><%=(@ft * 100).round.to_f / 100%>%</p></td>
+	  <%else%>
+	  <td><p class="text-error"><i class="icon-thumbs-down"></i><% @ft= ((d.package_price/d.package_qty)-(@drugs.first.package_price/@drugs.first.package_qty))/(@drugs.first.package_price/@drugs.first.package_qty)*100 %><%=(@ft * 100).round.to_f / 100%>%</p></td>
+	  <%end%>
+	</tr>
+	
+	<%end%>
+	
+	
+  </tbody>
+</table>

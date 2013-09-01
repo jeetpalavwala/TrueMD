@@ -1,0 +1,15 @@
+<% if (true) %>
+	<div class="row-fluid" align="center" style="margin-top: 1em;margin-bottom: 0em;">
+				<div class="span3" align="center">
+				</div>
+				<div class="span6" align="center">
+					<div class="alert alert-block alert-success fade in">
+						<button type="button" class="close" data-dismiss="alert">x</button>
+						<p><strong><%= @found %></strong> alternate medicine<% if @alt_drugs.length>1%>s<%end%> found for <strong><%= @drugs.first.brand %>!</strong></p>
+					</div>
+				</div>
+				<div class="span3" align="center">
+				</div>
+				
+	</div>
+<% end %>

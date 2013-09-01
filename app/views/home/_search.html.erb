@@ -1,0 +1,28 @@
+
+<form class="form-search" action="report/show" style=".dropdown-menu .active > a:hover { color: #333333; text-decoration: none; background-color: rgba(0, 0, 0, 1); }">
+		<input id="typehead"name="id"type="homesearch" autocomplete="off" placeholder="Eg: Combiflam" data-provide="typeahead" data-items="8" data-source="<%=@brands.to_json%>">
+		<button href="#" class="btn btn-large btn-primary" name="tag_ids[]" value="1"><i class="icon-search"></i> Search</button>
+		<span class="badge badge-important">beta</span><br />
+		<button href="#" class="btn btn-link" name="tag_ids[]" value="2"><i class="icon-bolt"></i>Advanced Search</button><a href="#advSearch" role="button" data-toggle="modal" ><i class="icon-info-sign"></i></a>
+		<button href="#" class="btn btn-link" >Search By Generic Name</button>
+
+</form>
+	
+	
+	
+	
+	
+	<!-- Info about Advanced Search-->
+	<div id="advSearch" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 style="font-size: 22px;font-family: 'Josefin Sans', sans-serif;font-weight: bold;" id="myModalLabel"> Advanced Search</h3>
+	  </div>
+	  <div class="modal-body">
+		<a>Info About Advanced Search</a>
+	  </div>
+	  <div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		
+	  </div>
+	</div>
