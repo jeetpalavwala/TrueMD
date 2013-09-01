@@ -4,7 +4,7 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 development:
-  adapter: mysql
+  adapter: mysql2
   database: aayush
   pool: 5
   timeout: 5000
@@ -21,7 +21,7 @@ test:
   timeout: 5000
 
 production:
-  adapter: mysql
+  adapter: mysql2
   encoding: utf8
   database: <%=ENV['OPENSHIFT_APP_NAME']%>
   pool: 5
