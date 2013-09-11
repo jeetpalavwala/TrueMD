@@ -36,11 +36,29 @@ ActiveRecord::Schema.define(:version => 20130624180901) do
     t.integer "generic_id"
   end
 
+  add_index "drugs", ["brand"], :name => "brand"
+  add_index "drugs", ["generic_id"], :name => "generic_id"
+
   create_table "generics", :force => true do |t|
-    t.integer "generic_id"
+    t.string  "generic_id"
     t.integer "qty"
     t.string  "name"
     t.string  "strength"
+  end
+
+  add_index "generics", ["generic_id"], :name => "generic_id"
+  add_index "generics", ["name"], :name => "name"
+  add_index "generics", ["qty"], :name => "qty"
+  add_index "generics", ["strength"], :name => "strength"
+
+  create_table "user_sessions", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
