@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  caches_action :index
+  #caches_action :index
   def index
   #Returns a list of drugs matching params:id
 	#@drugs = Drug.find(:all,:conditions => ['brand LIKE ?', "%#{params[:id]}%"])
