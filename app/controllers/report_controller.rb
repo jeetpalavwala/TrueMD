@@ -1,8 +1,8 @@
 class ReportController < ApplicationController
   
   def index
-	#render('report/index')
-  end#end of index action
+	redirect_to(:controller => 'home',:action => 'index')
+  end
   
   def show	
 	#Check whether it is normal or advanced search: 1- Normal Search, 2- Advanced Search
