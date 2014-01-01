@@ -1,38 +1,41 @@
 class ReportController < ApplicationController
-  
+  #Index Action
   def index
+	#If someone just types http://wwww...../report/, he is redirected to the home page
 	redirect_to(:controller => 'home',:action => 'index')
   end
-  
-  def show	
-	#Check whether it is normal or advanced search: 1- Normal Search, 2- Advanced Search
+
+  #Show Action  
+  def show
+	#Check whether it is normal or advanced search: 1-Normal Search, 2-Advanced Search
 	@tag_ids = params[:search_tag] || params[:tag_ids]
 
+	
 	#Returns a list of drugs matching params:id
-
-	if params[:id].blank?##Checking Search Parameter to be empty
-			flash[:notice]="Sorry! cant be blank. Try entering paracin'"
+	
+	#Checking Search Parameter to be empty
+	if params[:id].blank?
+			flash[:notice]="Sorry! can't be blank. Enter a medicine."
 			redirect_to(:controller => 'home',:action => 'index')
-
-	else# If search parameter is not empty
+	
+	# If search parameter is not empty
+	else
 			@drugs = Drug.find(:all,:conditions => ['brand LIKE ?', "#{params[:id]}"])
-
-
 
 			#If array has one element
 			if @drugs.length==1
 
 				#Cookie
-					@cookies =[cookies[:r1],cookies[:r2],cookies[:r3],cookies[:r4],cookies[:r5]]
-					hash = Hash[@cookies.map.with_index.to_a]
-					hash["#{params[:id]}"]
-					if !@cookies.include? ("#{params[:id]}")
-					cookies[:r5]=cookies[:r4]
-					cookies[:r4]=cookies[:r3]
-					cookies[:r3]=cookies[:r2]
-					cookies[:r2]=cookies[:r1]
-					cookies[:r1]={ :value => "#{params[:id]}"}
-					end
+				@cookies =[cookies[:r1],cookies[:r2],cookies[:r3],cookies[:r4],cookies[:r5]]
+				hash = Hash[@cookies.map.with_index.to_a]
+				hash["#{params[:id]}"]
+				if !@cookies.include? ("#{params[:id]}")
+				cookies[:r5]=cookies[:r4]
+				cookies[:r4]=cookies[:r3]
+				cookies[:r3]=cookies[:r2]
+				cookies[:r2]=cookies[:r1]
+				cookies[:r1]={ :value => "#{params[:id]}"}
+				end
 
 				#Extracting Constituents of the branded drug
 				@drug_constituents= Generic.find(:all, :conditions =>{:generic_id => @drugs.first.generic_id})
@@ -46,7 +49,7 @@ class ReportController < ApplicationController
 				end
 
 				#Finding alternate branded drugs having above generic or strength... It still have few errors
-				@alt_temp=Generic.where(name: @generics_name_array, qty: @drug_constituents.first.qty, strength: @generics_strength_array )
+				@alt_temp=Generic.where(name: @generics_name_array, qty: @drug_constituents.first.qty, strength:@generics_strength_array )
 				@hash= Hash[@generics_name_array.zip @generics_strength_array]
 				@alt=[]
 				# Correcting the temporary alternate drug list,creating alt list
