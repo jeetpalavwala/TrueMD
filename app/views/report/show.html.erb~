@@ -185,7 +185,7 @@
 				</div>
 				<%else%>
 				<div class="row-fluid">	
-					<h5 class="text-error">No Cheaper Alternative found</h5>
+					<a class="text-error">No Cheaper Alternative found</a>
 				</div>
 				</div>
 				<%end%>
