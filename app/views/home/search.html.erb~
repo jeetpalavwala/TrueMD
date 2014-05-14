@@ -14,13 +14,12 @@
 			<!-- Main Body Wrapper
 			=============================================== -->	
 			<div id="wrapper" style="position:relative;height:480px">
-						<!-- Logo
-						================================================== -->
+						<!-- Logo-->
 						<div class="container">
 						<section class="main">
 									
 									<h3 class="cs-text">
-										<span>P</span><span>a</span><span>y</span><span>l</span><span>.</span><span>e</span><span>s</span><span></span>
+										<span>P</span><span>a</span><span>y<span><span>l<span><span>.</span><span>e</span><span>s</span><span></span>
 									</h3>
 									
 						</section>
@@ -38,7 +37,7 @@
 				<div class="row-fluid" >
 					<div class="span12" align="center">
 						<div align="center">
-							<h1 style="font-size: 36px;font-family: 'Josefin Sans', sans-serif;font-weight: bold;">Search over a database of <span class="label label-warning">1,00,000 +</span> medicines ...</h1>
+							<h1 style="font-size: 36px;font-family: 'Josefin Sans', sans-serif;font-weight: bold;">Search over a database of <span class="text-error">1,00,000 +</span> medicines ...</h1>
 						</div>
 						<br />
 						<p style="margin-left: 100px;margin-right: 100px;"></p>
