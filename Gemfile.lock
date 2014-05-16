@@ -57,7 +57,8 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25)
     multi_json (1.7.9)
-    mysql2 (0.3.13)
+    mysql (2.9.1)
+    mysql (2.9.1-x86-mingw32)
     newrelic_rpm (3.6.7.152)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -114,7 +115,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   kaminari
-  mysql2
+  mysql
   newrelic_rpm
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
