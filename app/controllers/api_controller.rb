@@ -233,6 +233,40 @@ end
 	
  end
 
+def typeahead 
+ 	@id =params[:id] || ""
+ 	@key=params[:key] || ""
+	#Returns a list of drugs matching params[:id]
+	if !@id.empty? && !@key.empty? && authenticate("#{@key}")# Authenticating and validating key and id
+		@drugs = Drug.find(:all,:conditions => ['brand LIKE ?', "%#{params[:id]}%"], :limit =>(@limit= params[:limit] || 100 ))
+		@brands=Array.new
+		@i=0
+		@drugs.each do |d|
+			@temp=d.brand
+			@brands.push(@temp)
+			@i=@i+1
+		end
+		
+		respond_to do |format|
+		  format.html { render json: @brands.to_json }
+		  format.json { render json: @brands.to_json }
+		  format.xml { render xml: @brands.to_xml(:root => 'suggestions') }
+		end
+	else
+		if !authenticate("#{params[:key]}")
+			@msg="authentication failed"
+		else
+			@msg="empty parameters"
+		end
+		@brands=Array.new
+		respond_to do |format|
+		  format.html { render json: "\{\"#{@msg}\" :"+@brands.to_json+"\}" }
+		  format.json { render json: "\{\"#{@msg}\" :"+@brands.to_json+"\}" }
+		  format.xml { render xml: @brands.to_xml(:root => "#{@msg}") }
+		end
+	end
+	
+ end
 
  
 end
