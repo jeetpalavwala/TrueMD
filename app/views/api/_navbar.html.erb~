@@ -1,4 +1,4 @@
- <div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -15,13 +15,16 @@
                 <a href="<%= root_url %>">Home</a>
               </li>
               <li class="">
-                <a href="<%= root_url %>api/new">Api</a>
+                <a href="#">Generic Medicines</a>
               </li>
               <li class="">
-                <a href="<%= root_url %>api/documentation">Documentation</a>
+                <a href="#">FAQs</a>
+              </li>
+              <li class="">
+                <a href="#">Developer</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-  </div>
+</div>

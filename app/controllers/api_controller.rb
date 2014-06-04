@@ -1,11 +1,58 @@
+require 'securerandom'
+
 class ApiController < ApplicationController
-	
+
  def authenticate key
 	if ApiUser.find_by_api_key(key)
 		return true
 	else 
 		return false
 	end
+ end
+
+ def new
+ 	render
+ end
+
+ def create
+ 	first_name =params[:first_name]
+ 	email = params[:email]
+ 	password = params[:password]
+
+ 	if ApiUser.find_by_email(email)
+		redirect_to root_url+'api/dashboard/?email='+email
+	else 
+		@apiuser= ApiUser.new()
+	 	@apiuser.first_name = first_name
+	 	@apiuser.email = email
+	 	@apiuser.password = password
+	 	@apiuser.api_key = SecureRandom.hex(15)
+	 	@apiuser.save()
+	 	redirect_to root_url+'api/dashboard/?email='+email
+	end
+	
+ end
+ def login
+ 	email = params[:email]
+ 	password = params[:password]
+ 	if @apiuser = ApiUser.find_by_email(email)
+ 		if @apiuser.password==password
+ 			redirect_to root_url+'api/dashboard/?email='+email
+ 		else
+ 			render :text => "Invalid username/password"
+ 		end	
+ 	else
+ 		render :text => "Invalid username/password"
+ 	end
+ end
+
+ def dashboard
+ 	@apiuser =ApiUser.find_by_email(params[:email])
+ 	render
+ end
+
+ def documentation
+ 	render
  end
 
  def auto
