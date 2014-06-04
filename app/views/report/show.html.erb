@@ -159,7 +159,7 @@
 							<p class="text-info"><span class="label label-info"><i class="icon-inr"></i><%=@alt_drugs_paginated.first.package_price%></span></p>
 							<p>for a pack of <strong><%= @alt_drugs_paginated.first.package_qty.to_i%> <% if @alt_drugs_paginated.first.package_qty.to_i>1&&(@alt_drugs_paginated.first.package_type=="Tablet" || @alt_drugs_paginated.first.package_type=="Capsule" || @alt_drugs_paginated.first.package_type=="gm")%><%= @alt_drugs_paginated.first.package_type+"s" %><%else%><%= @alt_drugs_paginated.first.package_type%><%end%></strong></p>
 							<p class="text-success"><i class="icon-level-up"></i> You save <span class="label label-success"><i class="icon-inr"></i> <%=(((@drugs.first.package_price-(@alt_drugs_paginated.first.unit_price * @drugs.first.package_qty.to_i))* 1000).to_i)/1000.0%></span> on a pack</p>
-							<button type="button" class="btn btn-info"><i class="icon-hospital"></i> Find a store!</button>
+							<!--<button type="button" class="btn btn-info"><i class="icon-hospital"></i> Find a store!</button>-->
 						</div>
 						
 					</div>
