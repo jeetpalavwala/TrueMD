@@ -55,6 +55,7 @@ class ApiController < ApplicationController
  	render
  end
 
+#Core Apis
  def auto
  	@id =params[:id] || ""
 	#Returns a list of drugs matching params[:id]
@@ -83,6 +84,7 @@ class ApiController < ApplicationController
 	
  end
 
+#suggestion for a given keyword
  def suggest 
  	@id =params[:id] || ""
  	@key=params[:key] || ""
@@ -118,6 +120,7 @@ class ApiController < ApplicationController
 	
  end
  
+ #Search Generic Substitues for a given medicine
  def search
  	@id =params[:id] || ""
  	@key=params[:key] || ""
@@ -251,7 +254,8 @@ class ApiController < ApplicationController
 	end
 
 end
- def medicine 
+#Details of a particular medicine
+def medicine 
  	@id =params[:id] || ""
  	@key=params[:key] || ""
 	#Returns a list of drugs matching params[:id]
