@@ -55,37 +55,8 @@ class ApiController < ApplicationController
  	render
  end
 
-#Core Apis
- def auto
- 	@id =params[:id] || ""
-	#Returns a list of drugs matching params[:id]
-	if !@id.empty?# Authenticating and validating key and id
-		@drugs = Drug.find(:all,:conditions => ['brand LIKE ?', "%#{params[:id]}%"], :limit =>(@limit= params[:limit] || 50 ))
-		@brands=Array.new
-		
-		@drugs.each do |d|
-			@brands.push(d.brand)
-		end
-		
-		respond_to do |format|
-		  format.html { render json:@brands.to_json }
-		  format.json { render json:@brands.to_json }
-		  format.xml { render xml: @brands.to_xml(:root => 'suggestions') }
-		end
-	else
-		
-		@brands=Array.new
-		respond_to do |format|
-		  format.html { render json:@brands.to_json }
-		  format.json { render json:@brands.to_json }
-		  format.xml { render xml: @brands.to_xml(:root => "#{@msg}") }
-		end
-	end
-	
- end
-
 #suggestion for a given keyword
- def suggest 
+ def medicine_suggest 
  	@id =params[:id] || ""
  	@key=params[:key] || ""
 	#Returns a list of drugs matching params[:id]
@@ -100,28 +71,29 @@ class ApiController < ApplicationController
 		end
 		
 		respond_to do |format|
-		  format.html { render json: "\{\"suggestions\" :"+@brands.to_json+"\}" }
-		  format.json { render json: "\{\"suggestions\" :"+@brands.to_json+"\}" }
-		  format.xml { render xml: @brands.to_xml(:root => 'suggestions') }
+		  format.html { render json: {:status => :ok,:response =>{:suggestions => @brands}},status: 200}
+		  format.json { render json: {:status => :ok,:response =>{:suggestions => @brands}},status: 200}
 		end
 	else
+		# Autherization failed
 		if !authenticate("#{params[:key]}")
-			@msg="authentication failed"
+			respond_to do |format|
+			  format.html { render json: {:status => :unauthorized, :response => {}},status:401 }
+			  format.json { render json: {:status => :unauthorized, :response => {}},status:401 }
+			end
+		#Bad Request
 		else
-			@msg="empty parameters"
-		end
-		@brands=Array.new
-		respond_to do |format|
-		  format.html { render json: "\{\"#{@msg}\" :"+@brands.to_json+"\}" }
-		  format.json { render json: "\{\"#{@msg}\" :"+@brands.to_json+"\}" }
-		  format.xml { render xml: @brands.to_xml(:root => "#{@msg}") }
+			respond_to do |format|
+			  format.html { render json: {:status => :bad_request, :response => {}},status:400 }
+			  format.json { render json: {:status => :bad_request, :response => {}},status:400 }
+			end
 		end
 	end
 	
  end
  
  #Search Generic Substitues for a given medicine
- def search
+ def medicine_alternatives
  	@id =params[:id] || ""
  	@key=params[:key] || ""
 	#Returns a list of drugs matching params[:id]
@@ -254,37 +226,41 @@ class ApiController < ApplicationController
 	end
 
 end
-#Details of a particular medicine
-def medicine 
+
+#Find details of a particular medicine.
+def medicine_info
  	@id =params[:id] || ""
  	@key=params[:key] || ""
-	#Returns a list of drugs matching params[:id]
-	if !@id.empty? && !@key.empty? && authenticate("#{@key}")# Authenticating and validating key and id
-		@drug = Drug.find(:all,:conditions => ['brand LIKE ?', "#{params[:id]}"])
+	#Authenticating key and checking for empty parameters
+	if !@id.empty? && !@key.empty? && authenticate("#{@key}")
 		
-		
+		#Retreiving medicine's info
+		@drug = Drug.find_by_brand(@id)
+		@generics = Generic.find_by_generic_id(@drug.generic_id)
+
 		respond_to do |format|
-		  format.html { render json: "\{\"medicine\" :"+@drug.to_json+"\}"}
-		  format.json { render json: "\{\"medicine\" :"+@drug.to_json+"\}" }
-		  format.xml { render xml: @drug.to_xml(:root => 'medicine') }
+		  format.html { render json: {:status => :ok,:response =>{:medicine => @drug, :constituents => @generics}},status: 200}
+		  format.json { render json: {:status => :ok,:response =>{:medicine => @drug, :constituents => @generics}},status: 200}
 		end
 	else
+		# Autherization failed
 		if !authenticate("#{params[:key]}")
-			@msg="authentication failed"
+			respond_to do |format|
+			  format.html { render json: {:status => :unauthorized, :response => {}},status:401 }
+			  format.json { render json: {:status => :unauthorized, :response => {}},status:401 }
+			end
+		#Bad Request
 		else
-			@msg="empty parameters"
-		end
-		@brands=Array.new
-		respond_to do |format|
-		  format.html { render json: "\{\"#{@msg}\" :"+@brands.to_json+"\}" }
-		  format.json { render json: "\{\"#{@msg}\" :"+@brands.to_json+"\}" }
-		  format.xml { render xml: @brands.to_xml(:root => "#{@msg}") }
+			respond_to do |format|
+			  format.html { render json: {:status => :bad_request, :response => {}},status:400 }
+			  format.json { render json: {:status => :bad_request, :response => {}},status:400 }
+			end
 		end
 	end
 	
  end
 
-def typeahead 
+ def typeahead 
  	@id =params[:id] || ""
  	@key=params[:key] || ""
 	#Returns a list of drugs matching params[:id]

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="TrueMD is a generic medicine search engine which helps you find cheaper subtitutes of branded medicines which can be upto 1000 times cheaper.Now why pay more when you can get the same at a much lower price.">
     <meta name="author" content="Aayush Jain">
-
+ 
     <!-- Le styles -->
     <link href="<%= root_url %>/assets/css/bootstrap.css" rel="stylesheet">
     <link href="<%= root_url %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
@@ -227,24 +227,19 @@
         {
             $(document).ready(function(){
                
-
+              $( "#typeahead" ).keypress(function() {
+                var query = $( "#typeahead" ).val();
+                var url = '<%=root_url %>api/typeahead.json?id='+query+'&key=yash6992&limit=100';
+                $.get( url, function( data ) {
+                  console.log(data)
+                  var autocomplete = $('#typeahead').typeahead();
+                  autocomplete.data('typeahead').source = data; 
+                });
+              });
             });
         }
     }
 	</script>	
-	<script>
-			$('#typehd').typeahead({
-				source: function (query, process) {
-					return $.getJSON(
-						'lookup.json',
-						{ query: query },
-						function (data) {
-							return process(data);
-						});
-				}
-			});
-	</script>
 	
-
 
   </head>
