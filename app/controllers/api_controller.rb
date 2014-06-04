@@ -55,8 +55,8 @@ class ApiController < ApplicationController
  	render
  end
 
-#suggestion for a given keyword
- def medicine_suggest 
+#Medicine name suggestions for a given keyword
+ def medicine_suggestions 
  	@id =params[:id] || ""
  	@key=params[:key] || ""
 	#Returns a list of drugs matching params[:id]
@@ -92,7 +92,7 @@ class ApiController < ApplicationController
 	
  end
  
- #Search Generic Substitues for a given medicine
+ #Search Generic/Branded Substitues for a given medicine
  def medicine_alternatives
  	@id =params[:id] || ""
  	@key=params[:key] || ""
@@ -189,46 +189,45 @@ class ApiController < ApplicationController
 				end
 				
 				respond_to do |format|
-				  format.html { render json: "\{\"drugs\" :"+@alt_drugs[0,@limit].to_json+"\}" }
-				  format.json { render json: "\{\"drugs\" :"+@alt_drugs[0,@limit].to_json+"\}" }
-				  format.xml { render xml: @alt_drugs[0,@limit].to_xml(:root => "drugs") }
+				  format.html { render json: {:status => :ok,:response =>{:medicine_alternatives => @alt_drugs[0,@limit]},status: 200}}
+				  format.json { render json: {:status => :ok,:response =>{:medicine_alternatives => @alt_drugs[0,@limit]},status: 200}}
 				end
 			
 			elsif @drugs.length==0
 				@alt_drugs=[]
 				respond_to do |format|
-				  format.html { render json: "\{\"drugs\" :"+@alt_drugs[0,(@limit= params[:limit].to_i || 5000)].to_json+"\}" }
-				  format.json { render json: "\{\"drugs\" :"+@alt_drugs[0,(@limit= params[:limit].to_i || 5000)].to_json+"\}" }
-				  format.xml { render xml: @alt_drugs[0,(@limit= params[:limit].to_i || 5000)].to_xml(:root => "drugs") }
+				  format.html { render json: {:status => :ok,:response =>{:medicine_alternatives => @alt_drugs[0,(@limit= params[:limit].to_i || 5000)]},status: 200}}
+				  format.json { render json: {:status => :ok,:response =>{:medicine_alternatives => @alt_drugs[0,(@limit= params[:limit].to_i || 5000)]},status: 200}}
 				end
 			else
 				@alt_drugs=[]
 				respond_to do |format|
-				  format.html { render json: "\{\"drugs\" :"+@alt_drugs[0,(@limit= params[:limit].to_i || 5000)].to_json+"\}" }
-				  format.json { render json: "\{\"drugs\" :"+@alt_drugs[0,(@limit= params[:limit].to_i || 5000)].to_json+"\}" }
-				  format.xml { render xml: @alt_drugs[0,(@limit= params[:limit].to_i || 5000)].to_xml(:root => "drugs") }
+				  format.html { render json: {:status => :ok,:response =>{:medicine_alternatives => @alt_drugs[0,(@limit= params[:limit].to_i || 5000)]},status: 200}}
+				  format.json { render json: {:status => :ok,:response =>{:medicine_alternatives => @alt_drugs[0,(@limit= params[:limit].to_i || 5000)]},status: 200}}
 				end
 
 		    end
 		    	
 	else
+		# Autherization failed
 		if !authenticate("#{params[:key]}")
-			@msg="authentication failed"
+			respond_to do |format|
+			  format.html { render json: {:status => :unauthorized, :response => {}},status:401 }
+			  format.json { render json: {:status => :unauthorized, :response => {}},status:401 }
+			end
+		#Bad Request
 		else
-			@msg="empty parameters"
-		end
-		@brands=Array.new
-		respond_to do |format|
-		  format.json { render json: "\{\"#{@msg}\" :"+@brands.to_json+"\}" }
-		  format.json { render json: "\{\"#{@msg}\" :"+@brands.to_json+"\}" }
-		  format.xml { render xml: @brands.to_xml(:root => "#{@msg}") }
+			respond_to do |format|
+			  format.html { render json: {:status => :bad_request, :response => {}},status:400 }
+			  format.json { render json: {:status => :bad_request, :response => {}},status:400 }
+			end
 		end
 	end
 
 end
 
 #Find details of a particular medicine.
-def medicine_info
+def medicine_details
  	@id =params[:id] || ""
  	@key=params[:key] || ""
 	#Authenticating key and checking for empty parameters
@@ -236,8 +235,11 @@ def medicine_info
 		
 		#Retreiving medicine's info
 		@drug = Drug.find_by_brand(@id)
-		@generics = Generic.find_by_generic_id(@drug.generic_id)
-
+		if !@drug.blank?
+			@generics = Generic.find_by_generic_id(@drug.generic_id)
+		else
+			@generics =[]
+		end	
 		respond_to do |format|
 		  format.html { render json: {:status => :ok,:response =>{:medicine => @drug, :constituents => @generics}},status: 200}
 		  format.json { render json: {:status => :ok,:response =>{:medicine => @drug, :constituents => @generics}},status: 200}
@@ -260,6 +262,8 @@ def medicine_info
 	
  end
 
+# A simple array of suggestions strings for typeahead
+# Similar to medicine_suggestions, but it returns just a simle array 
  def typeahead 
  	@id =params[:id] || ""
  	@key=params[:key] || ""
