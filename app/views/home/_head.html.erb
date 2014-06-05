@@ -229,7 +229,7 @@
                
               $( "#typeahead" ).keypress(function() {
                 var query = $( "#typeahead" ).val();
-                var url = '<%=root_url %>api/typeahead.json?id='+query+'&key=yash6992&limit=100';
+                var url = '<%=root_url %>api/typeahead.json?id='+query+'&key=yash6992&limit=10';
                 $.get( url, function( data ) {
                   console.log(data)
                   var autocomplete = $('#typeahead').typeahead();
