@@ -4,7 +4,7 @@
   <%= render(:partial => "head")%>
   
    <!-- Navbar-->
-  <%= render(:partial => "navbar")%>
+  <%= render(:partial => "navbar_doc")%>
 
   <body data-spy="scroll" data-target=".bs-docs-sidebar">
   
@@ -24,14 +24,192 @@
             =================================================== -->
                         
                 
-            <div class="container-fluid" align="center">
+            <div class="container-fluid">
                     
                     <div class="row">
-                    <h3>Hi, <%= @apiuser.first_name%></h3><br />
-                    <h4>Your API Key is:</h4>
-                    <h4 class="text-info"><%= @apiuser.api_key%></h4>
-                    <br /> <br />
-                    <a href= "<%root_url%>/api/documentation">View Documentation </a>
+                    <div class="span3 " style="margin-top:20px;">
+                        <!-- Side Navbar -->
+                        <div class="row-fluid" align="center" >
+                        <br />
+                        <div class="span10" align="center">
+                        <ul class="nav nav-pills nav-stacked" style="background: rgb(247, 247, 247);">
+                          <li class="active"><a href="#">API Documentation</a></li>
+                          <li><a href="#restapi">REST API</a></li>
+                          <li><a href="#androidsdk">Android SDK</a></li>
+                          <li><a href="#javasdk">Java SDK</a></li>
+                        </ul>
+                        </div>
+                        </div>
+                                
+                    </div>
+
+                    <div class="span9" style="margin-top:20px;">
+                        <div class="row-fluid">
+                            <div class="span12">
+                            <p>Sign up for a free API account <a href="<%=root_url%>api/new/">here</a> and get your API key.</p>
+                            </div>
+                        </div>
+                        <div class="row-fluid" id="restapi">
+                            <div class="span12">
+                            <h3 class="text-info">REST API</h3>
+                            <hr />
+                            <p>There are 3 endpoints to retreive medicine's data</p>
+                            <ul>
+                                <li>
+                                    <div class="span12 well">
+                                    <h4 class="text-success">Medicine Suggestions</h4>
+                                    <p>Returns a JSON array of medicine names,matching SEARCH_STRING</p>
+                                    <p><b class="text-info">GET: </b> <%=root_url%>api/medicine_suggestion/?id=SEARCH_STRING&key=YOUR_API_KEY&limit=LIMIT</p>
+                                    <p><b>Response: </b><br />
+                                        {<br />
+                                        status: "ok",<br />
+                                        response: {<br />
+                                        suggestions: [<br />
+                                        {<br />
+                                        suggestion: "Cetri (10 mg)"<br />
+                                        },<br />
+                                        {<br />
+                                        suggestion: "Cetri-Plus (300 & 10)"<br />
+                                        },<br />
+                                        {<br />
+                                        suggestion: "Cetriax (1000 mg)"<br />
+                                        },<br />
+                                        {<br />
+                                        suggestion: "Cetricon (10 mg)"<br />
+                                        },<br />
+                                        {<br />
+                                        suggestion: "Cetrics (500 & 5 & 5)"<br />
+                                        }<br />
+                                        ]<br />
+                                        }<br />
+                                        }<br />
+
+                                    </p>
+                                    <p><b>Errors: </b>
+                                    <ul>
+                                        <li>Status: 400 - <span class="text-error">Bad Request</span></li>
+                                        <li>Status: 401 - <span class="text-error">Unauthorized</span></li>
+                                    </ul>
+                                    </p>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="span12 well">
+                                    <h4 class="text-success">Medicine Details</h4>
+                                    <p>Returns a JSON object having medicine information,of the medicine name <b>exactly</b> matching SEARCH_STRING</p>
+                                    <p class="text-error">P.S: Please perform a medicine_suggestion to get exact medicine name before using this endpoint</p>
+                                    <p><b class="text-info">GET: </b> <%=root_url%>api/medicine_Details/?id=SEARCH_STRING&key=YOUR_API_KEY&limit=LIMIT</p>
+                                    <p><b>Response: </b><br/>
+                                        {<br/>
+                                        status: "ok",<br/>
+                                        response: {<br/>
+                                        medicine: {<br/>
+                                        brand: "Cetricon (10 mg)",<br/>
+                                        category: "Tablet",<br/>
+                                        d_class: "null",<br/>
+                                        generic_id: 7482,<br/>
+                                        id: 18578,<br/>
+                                        manufacturer: "Icon Pharma & Surgicals Pvt. Ltd",<br/>
+                                        package_price: 13,<br/>
+                                        package_qty: 10,<br/>
+                                        package_type: "Tablet",<br/>
+                                        unit_price: 1.3,<br/>
+                                        unit_qty: 1,<br/>
+                                        unit_type: "Tablet"<br/>
+                                        },<br/>
+                                        constituents: {<br/>
+                                        generic_id: "7482",<br/>
+                                        id: 119227,<br/>
+                                        name: "Cetirizine",<br/>
+                                        qty: 1,<br/>
+                                        strength: "10 mg "<br/>
+                                        }
+                                        }
+                                        }
+                                    </p>
+                                    <p><b>Errors: </b>
+                                    <ul>
+                                        <li>Status: 400 - <span class="text-error">Bad Request</span></li>
+                                        <li>Status: 401 - <span class="text-error">Unauthorized</span></li>
+                                    </ul>
+                                    </p>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="span12 well">
+                                    <h4 class="text-success">Medicine Alternatives</h4>
+                                    <p>Returns a JSON object having alternative medicines,of the medicine name <b>exactly</b> matching SEARCH_STRING and have the same constituents</p>
+                                    <p class="text-error">P.S: Please perform a medicine_suggestion to get exact medicine name before using this endpoint</p>
+                                    <p><b class="text-info">GET: </b> <%=root_url%>api/medicine_alternatives/?id=SEARCH_STRING&key=YOUR_API_KEY&limit=LIMIT</p>
+                                    <p><b>Response: </b><br/>
+                                       {<br/>
+                                        status: 200,<br/>
+                                        response: {<br/>
+                                        medicine_alternatives: [<br/>
+                                        {<br/>
+                                        brand: "Alvin (10 mg)",<br/>
+                                        category: "Tablet",<br/>
+                                        d_class: "null",<br/>
+                                        generic_id: 38823,<br/>
+                                        id: 4005,<br/>
+                                        manufacturer: "Therawin Formulations",<br/>
+                                        package_price: 4,<br/>
+                                        package_qty: 10,<br/>
+                                        package_type: "Tablet",<br/>
+                                        unit_price: 0.4,<br/>
+                                        unit_qty: 1,<br/>
+                                        unit_type: "Tablet"<br/>
+                                        },<br/>
+                                        {<br/>
+                                        brand: "Citizen DT (10 mg)",<br/>
+                                        category: "Tablet",<br/>
+                                        d_class: "null",<br/>
+                                        generic_id: 22768,<br/>
+                                        id: 20231,<br/>
+                                        manufacturer: "Swiss Medicare Pvt. Ltd.",<br/>
+                                        package_price: 100,<br/>
+                                        package_qty: 200,<br/>
+                                        package_type: "Tablet",<br/>
+                                        unit_price: 0.5,<br/>
+                                        unit_qty: 1,<br/>
+                                        unit_type: "Tablet"<br/>
+                                        }<br/>
+                                        ]<br/>
+                                        }<br/>
+                                        }<br/>
+                                    </p>
+                                    <p><b>Errors: </b>
+                                    <ul>
+                                        <li>Status: 400 - <span class="text-error">Bad Request</span></li>
+                                        <li>Status: 401 - <span class="text-error">Unauthorized</span></li>
+                                    </ul>
+                                    </p>
+
+                                    </div>
+                                </li>
+                            </ul>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid" id="androidsdk">
+                            <div class="span12">
+                            <h3 class="text-info">Android SDK</h3>
+                            <hr />
+                            <p>Coming soon</p>
+                            </div>
+                        </div>
+                        <div class="row-fluid" id="javasdk">
+                            <div class="span12">
+                            <h3 class="text-info">JAVA SDK</h3>
+                            <hr />
+                            <p>Coming soon</p>
+                            </div>
+                        </div>
+                    </div>
+
+
                     </div>
                 
             </div>
