@@ -59,7 +59,12 @@
                                     <div class="span12 well">
                                     <h4 class="text-success">Medicine Suggestions</h4>
                                     <p>Returns a JSON array of medicine names,matching SEARCH_STRING</p>
-                                    <p><b class="text-info">GET: </b> <%=root_url%>api/medicine_suggestions/?id=SEARCH_STRING&key=YOUR_API_KEY&limit=LIMIT</p>
+                                    <p><b class="text-info">GET: </b> <%=root_url%>api/medicine_suggestions/</p>
+                                    <p><b>Parameters :</b><br />
+                                        id=SEARCH_STRING<br />
+                                        key=YOUR_API_KEY<br />
+                                        limit=LIMIT<br />
+                                    </p>
                                     <p><b>Response: </b><br />
                                         {<br />
                                         status: "ok",<br />
@@ -99,7 +104,11 @@
                                     <h4 class="text-success">Medicine Details</h4>
                                     <p>Returns a JSON object having medicine information,of the medicine name <b>exactly</b> matching SEARCH_STRING</p>
                                     <p class="text-error">P.S: Please perform a medicine_suggestion to get exact medicine name before using this endpoint</p>
-                                    <p><b class="text-info">GET: </b> <%=root_url%>api/medicine_details/?id=SEARCH_STRING&key=YOUR_API_KEY&limit=LIMIT</p>
+                                    <p><b class="text-info">GET: </b> <%=root_url%>api/medicine_details/</p>
+                                    <p><b>Parameters :</b><br />
+                                        id=SEARCH_STRING<br />
+                                        key=YOUR_API_KEY<br />
+                                    </p>
                                     <p><b>Response: </b><br/>
                                         {<br/>
                                         status: "ok",<br/>
@@ -142,7 +151,12 @@
                                     <h4 class="text-success">Medicine Alternatives</h4>
                                     <p>Returns a JSON object having alternative medicines,of the medicine name <b>exactly</b> matching SEARCH_STRING and have the same constituents</p>
                                     <p class="text-error">P.S: Please perform a medicine_suggestion to get exact medicine name before using this endpoint</p>
-                                    <p><b class="text-info">GET: </b> <%=root_url%>api/medicine_alternatives/?id=SEARCH_STRING&key=YOUR_API_KEY&limit=LIMIT</p>
+                                    <p><b class="text-info">GET: </b> <%=root_url%>api/medicine_alternatives/</p>
+                                    <p><b>Parameters :</b><br />
+                                        id=SEARCH_STRING<br />
+                                        key=YOUR_API_KEY<br />
+                                        limit=LIMIT<br />
+                                    </p>
                                     <p><b>Response: </b><br/>
                                        {<br/>
                                         status: 200,<br/>
